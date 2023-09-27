@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+</head>
+<body>
+    {% block content %}
+        <br>
+        <h1 style="text-align: center">Upcoming Events</h1>
+        <div class="event_container">
+            {% for i in event_list %}
+                <p>{{ i.event_name }}</p>
+                <p>{{ i.event_date }}</p>
+                <p>{{ i.location }}</p>
+                <p>{{ i.location.web }}</p>
+                <p>Present:</p>
+                {% for j in i.person.all %}
+                    <p>{{ j }}</p>
+                {% endfor %}
+            <br>
+            {% endfor %}
+
+        </div>
+
+
+    {% endblock %}
+</body>
+</html>
