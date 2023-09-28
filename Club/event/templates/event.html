@@ -4,27 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Event</title>
+
+
 </head>
 <body>
     {% block content %}
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            .event_container {
+                width: 80%;
+                margin: auto;
+            }
+
+            .event_box {
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                margin-bottom: 20px;
+                background-color: #f9f9f9;
+            }
+
+            .event_box p {
+                margin: 5px 0;
+            }
+
+            .event_box p:nth-child(odd) {
+                font-weight: bold;
+            }
+
+            .event_box p:nth-child(even) {
+                font-style: italic;
+            }
+
+            h1 {
+                text-align: center;
+            }
+        </style>
         <br>
-        <h1 style="text-align: center">Upcoming Events</h1>
+        <h1>Upcoming Events</h1>
         <div class="event_container">
             {% for i in event_list %}
-                <p>{{ i.event_name }}</p>
-                <p>{{ i.event_date }}</p>
-                <p>{{ i.location }}</p>
-                <p>{{ i.location.web }}</p>
-                <p>Present:</p>
-                {% for j in i.person.all %}
-                    <p>{{ j }}</p>
-                {% endfor %}
-            <br>
+                <div class="event_box">
+                    <p>{{ i.event_name }}</p>
+                    <p>{{ i.event_date }}</p>
+                    <p>{{ i.location }}</p>
+                    <p>{{ i.location.web }}</p>
+                    <p>Present:</p>
+                    {% for j in i.person.all %}
+                        <p>{{ j }}</p>
+                    {% endfor %}
+                </div>
             {% endfor %}
-
         </div>
-
-
     {% endblock %}
 </body>
 </html>
