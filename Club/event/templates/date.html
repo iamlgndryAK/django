@@ -4,15 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <title>DATE</title>
+
 </head>
 <body>
     {% block content %}
+        <style>
+            /* Add CSS for changing color */
+            #dynamic_heading {
+                text-align: center;
+                transition: color 0.5s ease; /* Add smooth transition */
+            }
+        </style>
         <br>
-        <h1 style="text-align: center">{{ day }}th of {{ month }}, {{ year }}</h1>
+        <h1 id="dynamic_heading">{{ day }}th of {{ month }}, {{ year }}</h1>
         <center>
             {{ calendar_data|safe }}
         </center>
-    {% endblock %}
 
+        <script>
+            // Get a reference to the heading
+            const heading = document.getElementById('dynamic_heading');
+
+            // Function to update the color based on seconds
+            function updateColor() {
+                const now = new Date();
+                const seconds = now.getSeconds();
+
+                // Example: Change color based on the seconds
+                const hue = (seconds / 60) * 360; // Hue value varies from 0 to 360 (representing all colors in the color wheel)
+                const color = `hsl(${hue}, 100%, 50%)`; // Use HSL color format
+
+                heading.style.color = color;
+            }
+
+            // Call the function to initially set the color
+            updateColor();
+
+            // Update the color every second
+            setInterval(updateColor, 1000);
+        </script>
+    {% endblock %}
 </body>
 </html>
