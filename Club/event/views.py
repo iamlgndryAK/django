@@ -22,5 +22,8 @@ def date(request, year=now.year, month=now.strftime('%B')):
 
 def event(request):
     event_list = Event.objects.all()
-
     return render(request, "event.html", context={"event_list": event_list})
+
+
+def calculator(request):
+    return render(request, "calculator.html")
