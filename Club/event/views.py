@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from calendar import HTMLCalendar, month_name
@@ -41,9 +41,13 @@ def login(request):
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            return render(request, "image_home.html")
+            return render(request, "home.html")
         else:
             messages.success(request, "Invalid username or password!!")
             return render(request, "login.html")
     else:
         return render(request, "login.html")
+
+
+def admin_login(request):
+    return redirect('/admin/')
