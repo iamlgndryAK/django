@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from calendar import HTMLCalendar, month_name
 from .models import Event
 from datetime import datetime
@@ -27,3 +29,21 @@ def event(request):
 
 def calculator(request):
     return render(request, "calculator.html")
+
+
+def form(request):
+    return render(request, "form.html")
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            return render(request, "image_home.html")
+        else:
+            messages.success(request, "Invalid username or password!!")
+            return render(request, "login.html")
+    else:
+        return render(request, "login.html")

@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Person
-from .models import Location
-from .models import Event
+from .models import Person, Location, Event
 
 
 admin.site.register(Person)
